@@ -1,0 +1,35 @@
+.pagination {
+    .pagination__list {
+        display: flex;
+        flex-direction: row;
+        gap: 18px;
+
+        list-style: none;
+
+        li {
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            width: 40px;
+            height: 40px;
+
+            border: 2px solid #EBEBEB;
+
+            cursor: pointer;
+
+            &:hover, &:focus {
+                border: 2px solid #1C1C1C;
+            }
+
+            transition: border 0.2s linear;
+        }
+
+        .active {
+            border: 2px solid #1C1C1C;
+            background: #1C1C1C;
+            color: #FFFFFF;
+        }
+    }
+}

@@ -1,0 +1,54 @@
+.form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+
+    margin: {
+        top: 18px;
+    }
+
+    input {
+        padding: 14px;
+
+        color: #1C1C1C;
+
+        font: {
+            size: 14px;
+        }
+
+        &::placeholder {
+            color: #1C1C1C;
+        }
+
+        &:focus {
+            outline: none;
+            border: 2px solid #1C1C1C;
+        }
+
+        border: 2px solid #EBEBEB;
+    }
+
+    .form__btn {
+        display: flex;
+
+        input {
+            width: 180px;
+            background: inherit;
+
+            border: 2px solid #1C1C1C;;
+            margin: 0 auto;
+
+            color: #1C1C1C;
+
+            cursor: pointer;
+
+            &:hover {
+                background: #1C1C1C;
+                color: #FFFFFF;
+            }
+
+            transition: background 0.2s linear;
+        }
+    }
+}
