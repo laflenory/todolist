@@ -1,14 +1,11 @@
+import { useSelector } from 'react-redux';
+
 import { Item, Pagination } from '../../components';
 
 import styles from './List.module.scss';
 
 const List = () => {
-    const items = [
-        { title: 'Привет, Мир!', description: 'Всем привет, меня зовут Артём!' },
-        { title: 'Привет, Мир!', description: 'Всем привет, меня зовут Артём!' },
-        { title: 'Привет, Мир!', description: 'Всем привет, меня зовут Артём!' },
-        { title: 'Привет, Мир!', description: 'Всем привет, меня зовут Артём!' },
-    ];
+    const items = useSelector((state) => state.todolist.items);
 
     return (
         <div className={styles.list}>
@@ -16,7 +13,11 @@ const List = () => {
                 <h2>Текущий список задач</h2>
             </header>
             <div className={styles.list__items}>
-                { items.map(({ title, description }) => <Item title={title} description={description} />) }
+                { 
+                    items.map(({ title, description }, index) => (
+                        <Item title={title} description={description} id={index} />
+                    ))
+                }
             </div>
             <Pagination />
         </div>

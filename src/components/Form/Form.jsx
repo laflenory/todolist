@@ -1,8 +1,13 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { addItem } from '../../store/todolistSlice';
 
 import styles from './Form.module.scss';
 
 const Form = () => {
+    const dispatch = useDispatch();
+    
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
@@ -21,6 +26,11 @@ const Form = () => {
 
     const formSubmit = (event) => {
         event.preventDefault();
+        
+        dispatch(addItem({ title, description }));
+
+        setTitle('');
+        setDescription('');
     }
 
     return (
@@ -28,7 +38,7 @@ const Form = () => {
             <input name={'title'} type={'text'} value={title} placeholder={'Заголовок'} />
             <input name={'description'} type={'text'} value={description} placeholder={'Описание'} />
             <div className={styles.form__btn}>
-                <input type={'submit'} value={'ДОБАВИТЬ'} />
+                <input type={'submit'} value={'Добавить'} />
             </div>
         </form>
     );
