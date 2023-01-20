@@ -7,19 +7,46 @@ import styles from './Form.module.scss';
 
 const Form = () => {
     const dispatch = useDispatch();
-    
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
+
+    const [item, setItem] = useState({
+        title: '',
+        description: '',
+    });
+
+    const [errors, setErrors] = useState({
+        title: false,
+        description: false, 
+    });
 
     const formChange = (event) => {
-        const { name } = event.target;
+        const { name, value } = event.target;
 
         switch (name) {
             case 'title':
-                setTitle(event.target.value);
+                if (value) {
+                    const { title } = errors;
+
+                    if (title) setErrors((prevState) => ({ ...prevState, title: !title }));
+
+                    setItem((prevState) => ({
+                        ...prevState,
+                        title: value,
+                    }));
+                }
+
                 break;
             case 'description':
-                setDescription(event.target.value);
+                if (value) {
+                    const { description } = errors;
+
+                    if (description) setErrors((prevState) => ({ ...prevState, description: !description }));
+
+                    setItem((prevState) => ({
+                        ...prevState,
+                        description: value,
+                    }));
+                }
+
                 break;
         }
     }
@@ -27,16 +54,21 @@ const Form = () => {
     const formSubmit = (event) => {
         event.preventDefault();
         
-        dispatch(addItem({ title, description }));
+        const { title, description } = item;
 
-        setTitle('');
-        setDescription('');
+        if (title && description) {
+            dispatch(addItem({ title, description }));
+            setItem({ title: '', description: '' });
+        } else {
+            if (!title) setErrors((prevState) => ({ ...prevState, title: true }));
+            if (!description) setErrors((prevState) => ({ ...prevState, description: true }));
+        }
     }
 
     return (
         <form className={styles.form} onChange={formChange} onSubmit={formSubmit}>
-            <input name={'title'} type={'text'} value={title} placeholder={'Заголовок'} />
-            <input name={'description'} type={'text'} value={description} placeholder={'Описание'} />
+            <input className={errors.title ? styles.error : ''} name={'title'} type={'text'} value={item.title} placeholder={'Заголовок'} />
+            <input className={errors.description ? styles.error : ''} name={'description'} type={'text'} value={item.description} placeholder={'Описание'} />
             <div className={styles.form__btn}>
                 <input type={'submit'} value={'Добавить'} />
             </div>

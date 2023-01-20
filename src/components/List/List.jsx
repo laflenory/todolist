@@ -15,7 +15,7 @@ const List = () => {
             <div className={styles.list__items}>
                 { 
                     items.map(({ title, description }, index) => (
-                        <Item title={title} description={description} id={index} />
+                        <Item title={title} description={description} id={index} key={index} />
                     ))
                 }
             </div>

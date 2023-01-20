@@ -24,16 +24,11 @@ const Pagination = () => {
                 { 
                     pages.map((page, index) => (
                         <li 
-                            className={
-                                active === index 
-                                    ? styles.active 
-                                    : null
-                            } 
-                            onClick={
-                                () => handlerSetActive(index)
-                            }
+                            className={active === index ? styles.active : null} 
+                            onClick={() => handlerSetActive(index)}
+                            key={index}
                         >
-                                { page }
+                            { page }
                         </li>
                     )) 
                 }
