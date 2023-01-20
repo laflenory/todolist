@@ -23,30 +23,30 @@ const Form = () => {
 
         switch (name) {
             case 'title':
-                if (value) {
-                    const { title } = errors;
+                const { title } = errors;
 
-                    if (title) setErrors((prevState) => ({ ...prevState, title: !title }));
-
-                    setItem((prevState) => ({
-                        ...prevState,
-                        title: value,
-                    }));
+                if (title) {
+                    setErrors((prevState) => ({ ...prevState, title: !title }));
                 }
+
+                setItem((prevState) => ({
+                    ...prevState,
+                    title: value,
+                }));
 
                 break;
             case 'description':
-                if (value) {
-                    const { description } = errors;
+                const { description } = errors;
 
-                    if (description) setErrors((prevState) => ({ ...prevState, description: !description }));
-
-                    setItem((prevState) => ({
-                        ...prevState,
-                        description: value,
-                    }));
+                if (description) {
+                    setErrors((prevState) => ({ ...prevState, description: !description }));
                 }
 
+                setItem((prevState) => ({
+                    ...prevState,
+                    description: value,
+                }));
+                
                 break;
         }
     }

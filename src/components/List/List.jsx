@@ -14,12 +14,14 @@ const List = () => {
             </header>
             <div className={styles.list__items}>
                 { 
-                    items.map(({ title, description }, index) => (
+                    items.length ? items.map(({ title, description }, index) => (
                         <Item title={title} description={description} id={index} key={index} />
-                    ))
+                    )) : <>
+                        <p>На данный момент текущий список задач пуст.</p>
+                    </>
                 }
             </div>
-            <Pagination />
+            {/* <Pagination /> */}
         </div>
     );
 }
