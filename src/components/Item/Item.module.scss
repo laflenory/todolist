@@ -30,11 +30,15 @@
         }
     }
 
+    .done {
+        text-decoration: line-through;
+    }
+
     &:hover {
         border: 2px solid #1C1C1C;
     }
 
     transition: border 0.2s linear;
-
-    cursor: default;
+    user-select: none;
+    cursor: default;    
 }

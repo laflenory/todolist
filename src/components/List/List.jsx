@@ -14,8 +14,14 @@ const List = () => {
             </header>
             <div className={styles.list__items}>
                 { 
-                    items.length ? items.map(({ title, description }, index) => (
-                        <Item title={title} description={description} id={index} key={index} />
+                    items.length ? items.map(({ title, description, done }, index) => (
+                        <Item 
+                            title={title} 
+                            description={description} 
+                            done={done} 
+                            id={index} 
+                            key={index} 
+                        />
                     )) : <>
                         <p>На данный момент текущий список задач пуст.</p>
                     </>

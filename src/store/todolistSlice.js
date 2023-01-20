@@ -7,9 +7,13 @@ export const todolistSlice = createSlice({
     },
     reducers: {
         addItem(state, { payload }) {
-            const { title, description } = payload;
+            state.items.push(payload);
+        },
+        executeItem(state, { payload }) {
+            const { id } = payload;
+            const { items } = state;
 
-            state.items.push({ title, description });
+            state.items[id].done = !items[id].done;
         },
         deleteItem(state, { payload }) {
             const { id } = payload;
@@ -19,6 +23,6 @@ export const todolistSlice = createSlice({
     }
 });
 
-export const { addItem, deleteItem } = todolistSlice.actions;
+export const { addItem, executeItem, deleteItem } = todolistSlice.actions;
 
 export default todolistSlice.reducer;

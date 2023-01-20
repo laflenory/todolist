@@ -57,7 +57,7 @@ const Form = () => {
         const { title, description } = item;
 
         if (title && description) {
-            dispatch(addItem({ title, description }));
+            dispatch(addItem({ title, description, done: false }));
             setItem({ title: '', description: '' });
         } else {
             if (!title) setErrors((prevState) => ({ ...prevState, title: true }));

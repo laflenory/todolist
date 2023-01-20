@@ -1,16 +1,16 @@
 import { useDispatch } from 'react-redux';
-import { deleteItem } from '../../store/todolistSlice';
+import { executeItem, deleteItem } from '../../store/todolistSlice';
 
 import styles from './Item.module.scss';
 
 import { FaTrash } from 'react-icons/fa';
 
-const Item = ({ title, description, id }) => {
+const Item = ({ title, description, done, id }) => {
     const dispatch = useDispatch();
 
     return (
-        <div className={styles.item}>
-            <div className={styles.item__content}>
+        <div className={styles.item} onDoubleClick={() => dispatch(executeItem({ id }))}>
+            <div className={[styles.item__content, done ? styles.done : ''].join(' ')}>
                 <h3>{ title }</h3>
                 <p>{ description }</p>
             </div>
