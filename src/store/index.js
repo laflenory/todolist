@@ -14,16 +14,13 @@ import {
 
 import todolistReducer from './todolistSlice';
 
-const reducers = combineReducers({ todolist: todolistReducer });
-const persistedReducer = persistReducer({ key: 'todolist', storage }, reducers);
-
 export default configureStore({
-    reducer: persistedReducer,
+    reducer: persistReducer({ key: 'todolist', storage }, combineReducers({ todolist: todolistReducer })),
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware({
             serializableCheck: {
                 ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             }
         });
-    }
+    },
 });
