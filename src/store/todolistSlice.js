@@ -7,27 +7,29 @@ export const todolistSlice = createSlice({
     },
     reducers: {
         addItem(state, { payload }) {
-            state.items.unshift(payload);
+            const { items } = state;
+            const id = items.length;
+
+            state.items.unshift({ ...payload, id });
         },
         executeItem(state, { payload }) {
+            let { items } = state;
             const { id } = payload;
-            const { items } = state;
 
-            const item = items[id];
-            items.splice(id, 1);
+            let item = items.find((item) => item.id === id);
+            items = items.filter((item) => item.id !== id);
 
-            item.done = !item.done;
+            item = { ...item, done: !item.done };
 
-            if (item.done) {
-                state.items.push(item);
-            } else {
-                state.items.unshift(item);
-            }
+            item.done
+                ? state.items = [...items, item]
+                : state.items = [item, ...items];
         },
         deleteItem(state, { payload }) {
+            const { items } = state;
             const { id } = payload;
 
-            state.items.splice(id, 1);
+            state.items = items.filter((item) => item.id !== id);
         },
     },
 });
