@@ -9,8 +9,8 @@ const Item = ({ title, description, done, id }) => {
     const dispatch = useDispatch();
 
     return (
-        <div className={styles.item} onDoubleClick={() => dispatch(executeItem({ id }))}>
-            <div className={[styles.item__content, done ? styles.done : ''].join(' ')}>
+        <div className={[styles.item, done ? styles.done : ''].join(' ')} onDoubleClick={() => dispatch(executeItem({ id }))}>
+            <div className={styles.item__content}>
                 <h3>{ title }</h3>
                 <p>{ description }</p>
             </div>

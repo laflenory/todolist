@@ -7,6 +7,8 @@
 
     border: 2px solid #EBEBEB;
 
+    color: #1C1C1C;
+
     padding: 18px;
 
     .item__content {
@@ -30,11 +32,6 @@
         }
     }
 
-    .done {
-        color: #EBEBEB;
-        text-decoration: line-through;
-    }
-
     &:hover {
         border: 2px solid #1C1C1C;
     }
@@ -42,4 +39,13 @@
     transition: all 0.3s linear;
     user-select: none;
     cursor: default;    
+}
+
+.done {
+    color: #EBEBEB;
+    text-decoration: line-through;
+
+    &:hover {
+        color: #1C1C1C;
+    }
 }
