@@ -13,7 +13,16 @@ export const todolistSlice = createSlice({
             const { id } = payload;
             const { items } = state;
 
-            state.items[id].done = !items[id].done;
+            const item = items[id];
+            items.splice(id, 1);
+
+            item.done = !item.done;
+
+            if (item.done) {
+                state.items.push(item);
+            } else {
+                state.items.unshift(item);
+            }
         },
         deleteItem(state, { payload }) {
             const { id } = payload;
