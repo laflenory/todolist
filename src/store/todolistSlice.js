@@ -7,7 +7,7 @@ export const todolistSlice = createSlice({
     },
     reducers: {
         addItem(state, { payload }) {
-            state.items.push(payload);
+            state.items.unshift(payload);
         },
         executeItem(state, { payload }) {
             const { id } = payload;
