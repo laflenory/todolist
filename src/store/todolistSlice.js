@@ -29,7 +29,7 @@ export const todolistSlice = createSlice({
 
             state.items.splice(id, 1);
         },
-    }
+    },
 });
 
 export const { addItem, executeItem, deleteItem } = todolistSlice.actions;
