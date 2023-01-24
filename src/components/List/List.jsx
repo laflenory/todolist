@@ -12,21 +12,22 @@ const List = () => {
             <header className={styles.list__header}>
                 <h2>Текущий список задач</h2>
             </header>
-            <div className={styles.list__items}>
+            <ul className={styles.list__items}>
                 { 
                     items.length ? items.map(({ title, description, done, id }, index) => (
-                        <Item 
-                            title={title} 
-                            description={description} 
-                            done={done} 
-                            id={id} 
-                            key={index}
-                        />
+                        <li key={index}>
+                            <Item 
+                                title={title} 
+                                description={description} 
+                                done={done} 
+                                id={id} 
+                            />
+                        </li>
                     )) : <>
                         <p>На данный момент текущий список задач пуст.</p>
                     </>
                 }
-            </div>
+            </ul>
             {/* <Pagination /> */}
         </div>
     );
