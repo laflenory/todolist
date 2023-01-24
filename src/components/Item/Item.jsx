@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
-import { executeItem, deleteItem } from '../../store/todolistSlice';
+import { openModal } from '../../store/modalSlice';
+import { executeItem } from '../../store/todolistSlice';
 
 import styles from './Item.module.scss';
 
@@ -15,7 +16,7 @@ const Item = ({ title, description, done, id }) => {
                 <p>{ description }</p>
             </div>
             <div className={styles.item__actions}>
-                <FaTrash onClick={() => dispatch(deleteItem({ id }))} />
+                <FaTrash onClick={() => dispatch(openModal({ target: 'delete', id: id }))} />
             </div>
         </div>
     );

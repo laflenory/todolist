@@ -13,9 +13,10 @@ import {
 } from 'redux-persist';
 
 import todolistReducer from './todolistSlice';
+import modalReducer from './modalSlice';
 
 export default configureStore({
-    reducer: persistReducer({ key: 'todolist', storage }, combineReducers({ todolist: todolistReducer })),
+    reducer: persistReducer({ key: 'todolist', storage }, combineReducers({ todolist: todolistReducer, modal: modalReducer })),
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware({
             serializableCheck: {
