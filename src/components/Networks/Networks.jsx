@@ -2,7 +2,7 @@ import styles from './Networks.module.scss';
 
 import { 
     FaGithub, 
-    FaLinkedinIn 
+    FaLinkedinIn,
 } from 'react-icons/fa';
 
 const Networks = () => {
@@ -16,6 +16,6 @@ const Networks = () => {
             </a>
         </div>
     );
-}
+};
 
 export default Networks;

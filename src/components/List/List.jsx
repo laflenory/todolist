@@ -31,6 +31,6 @@ const List = () => {
             {/* <Pagination /> */}
         </div>
     );
-}
+};
 
 export default List;

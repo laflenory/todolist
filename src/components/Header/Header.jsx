@@ -11,6 +11,6 @@ const Header = () => {
             <Networks />
         </header>
     );
-}
+};
 
 export default Header;

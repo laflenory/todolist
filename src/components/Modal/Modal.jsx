@@ -31,6 +31,10 @@ const Delete = ({ dispatch, action }) => {
     );
 };
 
+const Update = () => {
+
+};
+
 const Modal = () => {
     const { target, id } = useSelector((state) => state.modal);
     const dispatch = useDispatch();
@@ -43,7 +47,7 @@ const Modal = () => {
         if (target.className === styles.modal__wrapper) {
             dispatch(closeModal());
         }
-    }
+    };
 
     useEffect(() => {
         switch (target) {

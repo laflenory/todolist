@@ -20,6 +20,6 @@ const Item = ({ title, description, done, id }) => {
             </div>
         </div>
     );
-}
+};
 
 export default Item;

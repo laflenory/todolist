@@ -20,6 +20,6 @@ const Application = () => {
             { modalOpen ? <Modal /> : null }
         </>
     );
-}
+};
 
 export default Application;

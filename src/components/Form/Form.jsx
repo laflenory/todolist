@@ -49,7 +49,7 @@ const Form = () => {
                 
                 break;
         }
-    }
+    };
 
     const formSubmit = (event) => {
         event.preventDefault();
@@ -63,7 +63,7 @@ const Form = () => {
             if (!title) setErrors((prevState) => ({ ...prevState, title: true }));
             if (!description) setErrors((prevState) => ({ ...prevState, description: true }));
         }
-    }
+    };
 
     return (
         <form className={styles.form} onChange={formChange} onSubmit={formSubmit}>
@@ -74,6 +74,6 @@ const Form = () => {
             </div>
         </form>
     );
-}
+};
 
 export default Form;

@@ -11,7 +11,7 @@ const Pagination = () => {
         if (pages.includes(index + 1)) {
             setActive(index);
         }
-    }
+    };
 
     const pages = [1, 2, 3, 4, 5];
 
@@ -38,6 +38,6 @@ const Pagination = () => {
             </ul>
         </div>
     );
-}
+};
 
 export default Pagination;
