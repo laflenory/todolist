@@ -16,6 +16,7 @@ export const modalSlice = createSlice({
             state.id = id;
 
             document.body.style.overflowY = 'hidden';
+            document.body.style.marginRight = '16px';
         },
         closeModal(state) {
             state.open = false;
@@ -23,6 +24,7 @@ export const modalSlice = createSlice({
             state.id = null;
 
             document.body.style.overflowY = '';
+            document.body.style.marginRight = 0;
         },
     },
 });
