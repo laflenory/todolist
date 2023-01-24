@@ -76,14 +76,13 @@
 
                 button {
                     background: none;
-                    border: 2px solid #EBEBEB;
+                    border: 2px solid #1C1C1C;
                     padding: 8px 20px;
 
                     color: #1C1C1C;
 
                     &:hover {
                         color: #FFFFFF;
-                        border: 2px solid #1C1C1C;
                         background: #1C1C1C;
                     }
 
@@ -92,9 +91,10 @@
                 }
 
                 .agree {
+                    border: 2px solid #F44336;
+
                     &:hover {
                         background: #F44336;
-                        border: 2px solid #F44336;
                     }
                 }
             }

@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { 
+    useDispatch, 
+    useSelector,
+} from 'react-redux';
 
 import { deleteItem } from '../../store/todolistSlice';
 import { closeModal } from '../../store/modalSlice';
@@ -10,7 +12,16 @@ const Modal = () => {
     const { target, id } = useSelector((state) => state.modal);
     const dispatch = useDispatch();
 
-    const [action, setAction] = useState(null);
+    let action = null;
+
+    if (target === 'update') {
+        // TODO
+    } else {
+        action = () => {
+            dispatch(deleteItem({ id }));
+            dispatch(closeModal());
+        };
+    }
 
     const handlerCloseModal = (event) => {
         const { target } = event;
@@ -19,19 +30,6 @@ const Modal = () => {
             dispatch(closeModal());
         }
     };
-
-    useEffect(() => {
-        switch (target) {
-            case 'update':
-                break;
-            case 'delete':
-                setAction(() => () => { 
-                    dispatch(deleteItem({ id }));
-                    dispatch(closeModal());
-                });
-                break;
-        }
-    }, []);
 
     const modalContent = {
         delete: {
@@ -50,13 +48,12 @@ const Modal = () => {
                 Для продолжения заполните необходимые поля и нажмите кнопку <strong>"Да"</strong>.
                 Для отмены нажмите кнопку <strong>"Нет"</strong>.
             </p>,
-        }
+        },
     };
 
     return (
         <div className={styles.modal__wrapper} onClick={handlerCloseModal}>
             <div className={styles.modal}>
-
                 <header className={styles.modal__header}>
                     <h3>{ modalContent[target].title }</h3>
                 </header>
