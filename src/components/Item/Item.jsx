@@ -4,7 +4,7 @@ import { executeItem } from '../../store/todolistSlice';
 
 import styles from './Item.module.scss';
 
-import { FaTrash } from 'react-icons/fa';
+import { FaPen, FaTrash } from 'react-icons/fa';
 
 const Item = ({ title, description, done, id }) => {
     const dispatch = useDispatch();
@@ -16,7 +16,8 @@ const Item = ({ title, description, done, id }) => {
                 <p>{ description }</p>
             </div>
             <div className={styles.item__actions}>
-                <FaTrash onClick={() => dispatch(openModal({ target: 'delete', id: id }))} />
+                <FaPen onClick={() => dispatch(openModal({ target: 'update', id }))} />
+                <FaTrash onClick={() => dispatch(openModal({ target: 'delete', id }))} />
             </div>
         </div>
     );
