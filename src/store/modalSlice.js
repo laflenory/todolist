@@ -15,8 +15,14 @@ export const modalSlice = createSlice({
             state.target = target;
             state.id = id;
 
+            const { innerHeight } = window;
+            const { scrollHeight } = document.body;
+
             document.body.style.overflowY = 'hidden';
-            document.body.style.marginRight = '16px';
+
+            if (scrollHeight > innerHeight) {
+                document.body.style.marginRight = '16px';
+            }
         },
         closeModal(state) {
             state.open = false;

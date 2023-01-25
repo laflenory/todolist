@@ -12,6 +12,17 @@ export const todolistSlice = createSlice({
 
             state.items.unshift({ ...payload, id });
         },
+        updateItem(state, { payload }) {
+            const { title, description, id } = payload;
+
+            const item = state.items.find((item) => item.id === id);
+
+            item = {
+                title,
+                description,
+                ...item
+            };
+        },
         executeItem(state, { payload }) {
             let { items } = state;
             const { id } = payload;
@@ -34,6 +45,6 @@ export const todolistSlice = createSlice({
     },
 });
 
-export const { addItem, executeItem, deleteItem } = todolistSlice.actions;
+export const { addItem, updateItem, executeItem, deleteItem } = todolistSlice.actions;
 
 export default todolistSlice.reducer;
