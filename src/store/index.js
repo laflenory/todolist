@@ -12,16 +12,38 @@ import {
     REGISTER,
 } from 'redux-persist';
 
+import formReducer from './formSlice';
 import todolistReducer from './todolistSlice';
 import modalReducer from './modalSlice';
 
 export default configureStore({
-    reducer: persistReducer({ key: 'application', storage, blacklist: ['modal'] }, combineReducers({ todolist: todolistReducer, modal: modalReducer })),
+    reducer: persistReducer(
+        { 
+            key: 'application', 
+            blacklist: [
+                'form', 
+                'modal',
+            ],
+            storage,
+        },
+        combineReducers({ 
+            todolist: todolistReducer, 
+            modal: modalReducer, 
+            form: formReducer,
+        },
+    )),
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware({
             serializableCheck: {
-                ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-            }
+                ignoreActions: [
+                    FLUSH, 
+                    REHYDRATE, 
+                    PAUSE, 
+                    PERSIST, 
+                    PURGE, 
+                    REGISTER,
+                ],
+            },
         });
     },
 });

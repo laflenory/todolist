@@ -1,17 +1,26 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { 
+    changeTitle, 
+    changeDescrption, 
+    clearForm,
+} from '../../store/formSlice';
 
 import { addItem } from '../../store/todolistSlice';
 
 import styles from './Form.module.scss';
 
-const Form = () => {
+const Form = ({ isModal = false }) => {
     const dispatch = useDispatch();
 
-    const [item, setItem] = useState({
-        title: '',
-        description: '',
-    });
+    let { 
+        title, 
+        modalTitle, 
+        description,
+        modalDescription,
+        done,
+    } = useSelector((state) => state.form);
 
     const [errors, setErrors] = useState({
         title: false,
@@ -29,10 +38,7 @@ const Form = () => {
                     setErrors((prevState) => ({ ...prevState, title: !title }));
                 }
 
-                setItem((prevState) => ({
-                    ...prevState,
-                    title: value,
-                }));
+                dispatch(changeTitle({ title: value, isModal }));
 
                 break;
             case 'description':
@@ -42,10 +48,7 @@ const Form = () => {
                     setErrors((prevState) => ({ ...prevState, description: !description }));
                 }
 
-                setItem((prevState) => ({
-                    ...prevState,
-                    description: value,
-                }));
+                dispatch((changeDescrption({ description: value, isModal })));
                 
                 break;
         }
@@ -53,12 +56,10 @@ const Form = () => {
 
     const formSubmit = (event) => {
         event.preventDefault();
-        
-        const { title, description } = item;
 
         if (title && description) {
-            dispatch(addItem({ title, description, done: false }));
-            setItem({ title: '', description: '' });
+            dispatch(addItem({ title, description, done }));
+            dispatch(clearForm({ isModal }));
         } else {
             if (!title) setErrors((prevState) => ({ ...prevState, title: true }));
             if (!description) setErrors((prevState) => ({ ...prevState, description: true }));
@@ -67,11 +68,13 @@ const Form = () => {
 
     return (
         <form className={styles.form} onChange={formChange} onSubmit={formSubmit}>
-            <input className={errors.title ? styles.error : ''} name={'title'} type={'text'} value={item.title} placeholder={'Заголовок'} />
-            <input className={errors.description ? styles.error : ''} name={'description'} type={'text'} value={item.description} placeholder={'Описание'} />
-            <div className={styles.form__btn}>
-                <input type={'submit'} value={'Добавить'} />
-            </div>
+            <input className={errors.title ? styles.error : ''} name={'title'} type={'text'} value={isModal ? modalTitle : title} placeholder={'Заголовок'} />
+            <input className={errors.description ? styles.error : ''} name={'description'} type={'text'} value={isModal ? modalDescription : description} placeholder={'Описание'} />
+            {
+                !isModal ? <div className={styles.form__btn}>
+                    <input type={'submit'} value={'Добавить'} />
+                </div> : null
+            }
         </form>
     );
 };

@@ -1,8 +1,13 @@
+import {
+    Form,
+} from '../../components';
+
 import { 
     useDispatch, 
     useSelector,
 } from 'react-redux';
 
+import { clearForm } from '../../store/formSlice';
 import { updateItem, deleteItem } from '../../store/todolistSlice';
 import { closeModal } from '../../store/modalSlice';
 
@@ -35,6 +40,8 @@ const Delete = ({ dispatch, action, onClose }) => {
 };
 
 const Update = ({ dispatch, action, onClose }) => {
+    let { modalTitle, modalDescription } = useSelector((state) => state.form);
+
     return (
         <div className={styles.modal__wrapper} onClick={onClose}>
             <div className={styles.modal}>
@@ -47,11 +54,12 @@ const Update = ({ dispatch, action, onClose }) => {
                         Для продолжения заполните необходимые поля и нажмите кнопку <strong>"Да"</strong>.
                         Для отмены нажмите кнопку <strong>"Нет"</strong>.
                     </p>
+                    <Form isModal={true} />
                 </div>
                 <div className={styles.modal__actions}>
                     <div className={styles.modal__actions__buttons}>
-                        <button onClick={() => dispatch(closeModal())}>Нет</button>
-                        <button className={styles.agree} onClick={() => action()}>Да</button>
+                        <button onClick={() => { dispatch(closeModal()); dispatch(clearForm({ isModal: true })); }}>Нет</button>
+                        <button className={styles.agree} onClick={() => action(modalTitle, modalDescription)}>Да</button>
                     </div>
                 </div>
             </div>
@@ -69,6 +77,7 @@ const Modal = () => {
         action = (title, description) => {
             dispatch(updateItem({ title, description, id }));
             dispatch(closeModal());
+            dispatch(clearForm({ isModal: true }));
         };
     } else {
         action = () => {
@@ -82,6 +91,7 @@ const Modal = () => {
 
         if (target.className === styles.modal__wrapper) {
             dispatch(closeModal());
+            dispatch(clearForm({ isModal: true }));
         }
     };
 

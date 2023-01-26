@@ -13,15 +13,20 @@ export const todolistSlice = createSlice({
             state.items.unshift({ ...payload, id });
         },
         updateItem(state, { payload }) {
+            const { items } = state;
             const { title, description, id } = payload;
 
-            const item = state.items.find((item) => item.id === id);
+            let item = items.find((item) => item.id === id);
+            const index = items.indexOf(item);
 
             item = {
+                ...item,
                 title,
                 description,
-                ...item
             };
+
+            items[index] = item;
+            state.items = items;
         },
         executeItem(state, { payload }) {
             let { items } = state;
